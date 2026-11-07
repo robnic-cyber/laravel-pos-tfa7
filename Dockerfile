@@ -20,10 +20,11 @@ COPY --from=build /app .
 COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache
+    && touch database/database.sqlite \
+    && chown -R www-data:www-data storage bootstrap/cache database/database.sqlite
 
 ENV APP_ENV=production
 ENV APP_DEBUG=false
 
 EXPOSE 80
-CMD ["apache2-foreground"]
+CMD ["sh", "-c", "set -e; php artisan migrate --force; php artisan storage:link || true; exec apache2-foreground"]
