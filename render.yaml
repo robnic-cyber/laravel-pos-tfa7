@@ -8,6 +8,8 @@ services:
         sync: false
       - key: APP_ENV
         value: production
+      - key: APP_URL
+        value: https://laravel-pos-532c.onrender.com
       - key: APP_DEBUG
         value: "false"
       - key: LOG_CHANNEL
