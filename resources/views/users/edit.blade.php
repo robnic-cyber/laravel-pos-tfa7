@@ -1,0 +1,2 @@
+@extends('layouts.app', ['title' => 'Edit User'])
+@section('content')<div class="page-head"><div><h1>Edit user</h1><p class="muted">Update account details and optionally replace the prepared avatar.</p></div></div><div class="panel"><form method="POST" action="{{ route('users.update', $user) }}" enctype="multipart/form-data">@csrf @method('PUT') @include('users._form', ['submitLabel' => 'Save changes', 'showAvatar' => true])</form></div>@endsection
